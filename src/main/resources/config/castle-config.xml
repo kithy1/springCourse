@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:contex="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <contex:property-placeholder location="castle.properties"/>
+
+    <bean id="castle" class="com.clockworkjava.kursspring.domain.Castle" init-method="build" destroy-method="tearDown">
+        <constructor-arg index="0" ref="lancelot"/>
+        <property name="name" value="${my.castle.name:East Eatch}"/>
+
+    </bean>
+
+    <bean id="tournament" class="com.clockworkjava.kursspring.domain.Tournament">
+        <property name="knights">
+<!--            <list>-->
+<!--                <ref bean="percival"/>-->
+<!--                <ref bean="lancelot"/>-->
+<!--            </list>-->
+            <map>
+                <entry key="lancelot" value-ref="lancelot"/>
+                <entry key="percival" value-ref="percival"/>
+            </map>
+        </property>
+    </bean>
+</beans>
